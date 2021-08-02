@@ -5,12 +5,18 @@
     <title>Users</title>
 </head>
 <body>
+<h1>All users are here</h1>
+<a href="/users/new">Add new User</a>
+</br>
+</br>
 <table border="1">
     <tr>
         <th>Id</th>
         <th>Name</th>
         <th>Age</th>
         <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
 
     </tr>
 
@@ -20,6 +26,9 @@
         <td th:utext="${user.getName()}">Name</td>
         <td th:utext="${user.getAge()}">Age</td>
         <td th:utext="${user.getEmail()}">Email</td>
+        <td><a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a></td>
+        <td><a th:href="@{/users/{id}/delete(id=${user.getId()})}">Delete</a></td>
+
 
     </tr>
 
