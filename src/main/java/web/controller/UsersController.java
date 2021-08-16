@@ -47,7 +47,6 @@ public class UsersController {
 
     @PostMapping(value = "/admin/newuser")
     public String addUser(@ModelAttribute("user") User user, ModelMap model, @RequestParam(value = "rolesbox") String[] rolesBox) {
-     //                     @RequestParam (value = "username") String username){
             Set<Role> roles = new HashSet<>();
             for (String rolesBoxes: rolesBox) {
                 roles.add(rs.getRoleByName(rolesBoxes));

@@ -15,13 +15,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
-    private String username;
-    @Column
     private Integer age;
     @Column
     private String email;
     @Column
     private String password;
+    @Column
+    private String firstName;
 
     @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable (name = "users_roles", joinColumns = @JoinColumn (name = "users_id"),
@@ -32,9 +32,9 @@ public class User implements UserDetails {
 
     }
 
-    public User(Long id, String username, Integer age, String email, String password, Set<Role> roles) {
+    public User(Long id, String firstName, Integer age, String email, String password, Set<Role> roles) {
         this.id = id;
-        this.username = username;
+        this.firstName = firstName;
         this.age = age;
         this.email = email;
         this.password = password;
@@ -49,8 +49,8 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setName(String username) {
-        this.username = username;
+    public void setName(String login) {
+        this.firstName = login;
     }
 
     public Integer getAge() { return age; }
@@ -86,7 +86,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return firstName;
     }
 
     @Override
@@ -115,7 +115,7 @@ public class User implements UserDetails {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + username + '\'' +
+                ", name='" + firstName + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
