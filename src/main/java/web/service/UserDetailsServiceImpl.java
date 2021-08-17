@@ -6,11 +6,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import web.model.User;
 
 @Service
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserService userService;
+
     @Autowired
     public UserDetailsServiceImpl(UserService userService) {
         this.userService = userService;
@@ -18,6 +20,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return userService.getUserByName(login);
+        User realUser = userService.getUserByName(login);
+        if (realUser == null) {
+            throw new UsernameNotFoundException("Login " + login + " doesn't exist");
+        }
+        return realUser;
     }
 }

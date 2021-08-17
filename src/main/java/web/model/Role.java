@@ -11,12 +11,12 @@ import java.util.List;
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column
     private String role;
 
-    @ManyToMany (mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles")
     private List<User> users;
 
     public List<User> getUsers() {

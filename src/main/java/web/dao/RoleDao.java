@@ -5,7 +5,6 @@ import web.model.Role;
 import java.util.List;
 
 public interface RoleDao {
-    //User getRole(String name);
 
     void createRole(Role role);
 

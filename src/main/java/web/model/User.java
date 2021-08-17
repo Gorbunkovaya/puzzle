@@ -23,9 +23,9 @@ public class User implements UserDetails {
     @Column
     private String password;
 
-    @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable (name = "users_roles", joinColumns = @JoinColumn (name = "users_id"),
-            inverseJoinColumns = @JoinColumn (name = "roles_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id"))
     private Set<Role> roles;
 
     public User() {
@@ -49,17 +49,29 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public void setName(String login) {
+    public void setLogin(String login) {
         this.login = login;
     }
 
-    public Integer getAge() { return age; }
+    public String getLogin() {
+        return login;
+    }
 
-    public void setAge(Integer age) { this.age = age; }
+    public Integer getAge() {
+        return age;
+    }
 
-    public String getEmail() { return email; }
+    public void setAge(Integer age) {
+        this.age = age;
+    }
 
-    public void setEmail(String email) { this.email = email; }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public void setPassword(String password) {
         this.password = password;
@@ -108,7 +120,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 
 
     @Override
