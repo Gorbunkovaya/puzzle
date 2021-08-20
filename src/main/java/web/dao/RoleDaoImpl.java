@@ -31,12 +31,12 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role getRoleByName(String role) {
-        return entityManager.createQuery("SELECT role FROM Role role WHERE role.role=:role",
+        return entityManager.createQuery("SELECT role FROM Role role JOIN FETCH role.users WHERE role.role=:role",
                 Role.class).setParameter("role", role).getSingleResult();
     }
 
     @Override
     public List<Role> getRolesList() {
-        return entityManager.createQuery("SELECT role FROM Role role", Role.class).getResultList();
+        return entityManager.createQuery("SELECT role FROM Role role JOIN FETCH role.users", Role.class).getResultList();
     }
 }

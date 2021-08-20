@@ -1,7 +1,6 @@
 package web.dao;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
 import javax.persistence.EntityManager;
@@ -31,7 +30,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> getUsersList() {
-        return entityManager.createQuery("SELECT user FROM User user", User.class).getResultList();
+        return entityManager.createQuery("SELECT user FROM User user JOIN FETCH user.roles", User.class).getResultList();
     }
 
     @Override
@@ -41,7 +40,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User getUserByName(String login) {
-        return entityManager.createQuery("SELECT user from User user WHERE user.login=:login",
+        return entityManager.createQuery("SELECT user from User user JOIN FETCH user.roles WHERE user.login=:login",
                 User.class).setParameter("login", login).getSingleResult();
     }
 
